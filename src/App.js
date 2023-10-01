@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter, Routes, Route} from "react-router-dom"
+import Home from "./components/Home";
+import Login from "./components/Login";
+import NotFound from "./components/NotFound";
+import Dashboard from "./components/Dashboard";
+import AiConnectors from "./components/AiConnectors";
+import Store from "./components/Store";
+import Assets from "./components/Assets";
+import Settings from "./components/Settings";
+import Investigate from "./components/Investigate";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home/>}>
+              <Route path="/dashboard" element={<Dashboard/>} />
+              <Route path="/connectors" element={<AiConnectors/>} />
+              <Route path="/store" element={<Store/>} />
+              <Route path="/assets" element={<Assets/>} />
+              <Route path="/settings" element={<Settings/>} />
+              <Route path="/investigate" element={<Investigate/>} />
+            </Route>
+            <Route path="/login" element={<Login/>} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+      </BrowserRouter> 
+    </>
   );
 }
 
