@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/cybernator/static/css/main.d8c38ca7.css",
-    "main.js": "/cybernator/static/js/main.26ce17f9.js",
+    "main.css": "/cybernator/static/css/main.8c8617d7.css",
+    "main.js": "/cybernator/static/js/main.48555318.js",
     "static/js/787.cda6ccf0.chunk.js": "/cybernator/static/js/787.cda6ccf0.chunk.js",
     "index.html": "/cybernator/index.html",
-    "main.d8c38ca7.css.map": "/cybernator/static/css/main.d8c38ca7.css.map",
-    "main.26ce17f9.js.map": "/cybernator/static/js/main.26ce17f9.js.map",
+    "main.8c8617d7.css.map": "/cybernator/static/css/main.8c8617d7.css.map",
+    "main.48555318.js.map": "/cybernator/static/js/main.48555318.js.map",
     "787.cda6ccf0.chunk.js.map": "/cybernator/static/js/787.cda6ccf0.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d8c38ca7.css",
-    "static/js/main.26ce17f9.js"
+    "static/css/main.8c8617d7.css",
+    "static/js/main.48555318.js"
   ]
 }
