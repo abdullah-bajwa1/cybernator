@@ -32,7 +32,7 @@ const Caption = styled.div`
 const Tile = ({ imageName, caption }) => {
   return (
     <TileContainer>
-      <Image src={imageName} alt="Tile Image" />
+      <Image src={process.env.PUBLIC_URL + '/' + imageName} alt="Tile Image" />
       <Caption><h2>{caption}</h2></Caption>
     </TileContainer>
   );

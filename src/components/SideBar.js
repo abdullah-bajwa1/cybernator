@@ -7,7 +7,7 @@ const SideBar = () => {
   return (
     <div className="sidebar">
      <ul>
-        <li><Link className="link" to="/dashboard"><div className="sidebar-icon"><FaHouseUser /></div><div className="no-wrap" href="/dashboard">Dashboard</div></Link></li>
+        <li><Link className="link" to="/"><div className="sidebar-icon"><FaHouseUser /></div><div className="no-wrap" href="/dashboard">Dashboard</div></Link></li>
         <li><Link className="link" to="/connectors"><div className="sidebar-icon"><FaShapes /></div><div className="no-wrap" href="/dashboard/avatars">AI Connectors</div></Link></li>
         <li><Link className="link" to="/store"><div className="sidebar-icon"><AiOutlineAppstoreAdd /></div><div className="no-wrap" href="/dashboard/avatars">Store</div></Link></li>
         <li><Link className="link" to="/assets"><div className="sidebar-icon"><FaNetworkWired /></div><div className="no-wrap" href="/dashboard/avatars">Assets</div></Link></li>

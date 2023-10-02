@@ -2,7 +2,7 @@ import {FaArrowRightFromBracket} from 'react-icons/fa6'
 const Navbar = () => {
   return (
     <nav>
-      <a href="/"><img className="nav-logo" src="/CN-5 compressed.png" alt=""></img></a>
+      <a href="/"><img className="nav-logo" src={process.env.PUBLIC_URL + '/CN-5 compressed.png'} alt=""></img></a>
       
         <ul>
           

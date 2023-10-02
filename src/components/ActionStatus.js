@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const TileContainer = styled.div`
@@ -29,9 +30,40 @@ const Caption = styled.div`
 `;
 
 const ActionStatus = ({ count, caption }) => {
+  const [value, setValue] = useState(0);
+  const duration = 3000;
+  const interval = 150;
+  useEffect(()=> {
+    const step = Math.ceil(count/(duration/interval))
+    const updateValue = ()=> {
+      if(step > count-value){
+        setValue(count)
+      }else{
+        setValue(value+step)
+      }
+
+
+    }
+    const intervalId = setInterval(() => {
+      if (value < count) {
+          console.log("running interval")
+          updateValue();
+      } else {
+        console.log("clearing interval")  
+        clearInterval(intervalId);
+      }
+      }, interval);
+
+    return (() => {
+      clearInterval(intervalId);
+    })
+
+
+  },[value, count] );
+  
   return (
     <TileContainer>
-      <Count>{count}</Count>
+      <Count>{value}</Count>
       <Caption><h2>{caption}</h2></Caption>
     </TileContainer>
   );
