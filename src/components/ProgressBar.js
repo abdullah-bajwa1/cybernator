@@ -1,7 +1,7 @@
 import { calculateColorCode } from "../utils";
 import { useState, useEffect } from "react";
 
-const ProgressBar = ({ percent, label }) => {
+const ProgressBar = ({ percent, label, widthOveride, padding }) => {
 
   const [value, setValue] = useState(0);
   const duration = 3000;
@@ -34,7 +34,7 @@ const ProgressBar = ({ percent, label }) => {
   
 
   return (
-    <div className="highlight ultrawide">
+    <div className="highlight ultrawide"  style={{width : widthOveride ? (widthOveride) : ""}}>
         <div className="transition-width progress-bar" style={{ width: `${value}%`, backgroundColor: calculateColorCode(value) }}></div>
             <p>{label}: {value}%</p>
     </div>

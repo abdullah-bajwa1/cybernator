@@ -41,9 +41,6 @@ const Dashboard = () => {
             <ActionStatus count={manualCount} caption="Manual Actions Needed"/>
             <ActionStatus count={autoCount} caption="Automatic Actions Count"/>
         </div>
-        <div className="column-container-small">
-            
-        </div>
         <div className="shadow-box">
             <div className="column-container-small">
 
