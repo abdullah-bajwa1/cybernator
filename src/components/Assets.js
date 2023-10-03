@@ -1,101 +1,80 @@
 import React, { useState } from "react";
-import ProgressBar from "./ProgressBar";
-import ActionStatus from "./ActionStatus";
-import SimpleLineGraph from "./SimpleLineGraph";
-import { Link } from "react-router-dom";
+import ComplexLineGraph from "./ComplexLineGraph";
+
 
 const Assets = () => {
+  const tabs = ['My Models', 'My Clouds', 'My Stream']
   const objects = [
-    { name: "ChatGPT", health: 75, auto: 12, manual: 5, activity: [12,10,9,7,11] },
-    { name: "Claude", health: 88, auto: 8, manual: 3, activity: [3,8,12,6,14] },
-    { name: "Llama", health: 42, auto: 15, manual: 7, activity: [12,9,9,7,10] },
-    { name: "Orca", health: 95, auto: 18, manual: 4, activity: [2,10,9,7,6] },
-    { name: "Falcon", health: 63, auto: 9, manual: 6,activity: [4,8,11,17,11] },
-    { name: "H2O", health: 54, auto: 11, manual: 9, activity: [12,0,4,7,11] },
+    { name: "ChatGPT", health: 75, auto: 12, manual: 5, activity: [12,10,9,7,11,13,9,10,8,7], color:'red' },
+    { name: "Claude", health: 88, auto: 8, manual: 3, activity: [3,8,12,6,14,12,11,9,9,12] ,color:'green'},
+    { name: "Llama", health: 42, auto: 15, manual: 7, activity: [12,9,9,7,10,11,14,9,11,8] ,color: 'black'},
+    { name: "Orca", health: 95, auto: 18, manual: 4, activity: [2,10,9,7,6,9,10,8,11,10], color: 'cyan'},
+    { name: "Falcon", health: 63, auto: 9, manual: 6,activity: [4,8,11,17,11,10,8,6,8,11], color: 'pink'},
+    { name: "H2O", health: 54, auto: 11, manual: 9, activity: [12,0,4,7,11,13,12,4,9,10],color: 'orange' },
   ];
 
-  const xLabels = ['Jan', 'feb', 'mar', 'apr','may']
+  const months = ['Jan', 'feb', 'mar', 'apr','may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
 
-  const [selectedObject, setSelectedObject] = useState(objects[0]);
+  const [selectedTab, setSelectedTab] = useState(tabs[0]);
 
-  const handleSelectObject = (object) => {
-    console.log(object)
-    setSelectedObject(object);
+  const handleSelectObject = (tab) => {
+    console.log(tab)
+    setSelectedTab(tab);
   };
 
-  const ObjectInfo = ({ selectedObject }) => {
-    if (!selectedObject) {
-      return null;
-    }
-
+  const ObjectInfo = () => {
     return (
       
       <div className="asset-details shadow-box-margin-left" style={{overflowX: "auto"}}>
         <div className="shadow-box">
-          <ActionStatus count={selectedObject.auto} caption="Automatic Actions Count"/>
-          <ActionStatus count={selectedObject.manual} caption="Manual Actions Needed" />
-          <SimpleLineGraph xLabels={xLabels} graphTitle="Connector Activity" dataPoints={selectedObject.activity}/>
+          <ComplexLineGraph xLabels={months} graphTitle="Connector Activity" dataSetIn={objects}/>
         </div>
-        <ProgressBar percent={selectedObject.health} label={selectedObject.name+" Health"} widthOveride="900px" padding={true} />
-        
         
         <div className="row-container-small">
         <div className="shadow-box">
-              <div className="column-container-small">
-
-                  <div className="text-tile">
-                     <h2 style={{marginLeft: "10px"}}>Top Threats</h2>
-                      <hr style={{marginTop: "10px"}}/>
-
-                      <Link to="/connectors"><div className="highlight ultrawide">
-                        ChatGPT (explore)
-                      </div></Link>
-                      <Link to="/connectors"><div className="highlight ultrawide">
-                        Llama (explore)
-                      </div></Link>
-                      
-                              
-                  </div>
-                        
-              </div>
+          <table className="graph-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                {months.map((month, index) => (
+                  <th key={index}>{month}</th>
+                ))}
+                
+              </tr>
+            </thead>
+            <tbody>
+              {objects.map((object, index) => (
+                <tr key={index}>
+                  <td>{object.name}</td>
+                  {object.activity.map((value, index) => (
+                    <td key={index}>{value}</td>
+                  ))}
+                  <td></td>
+                  <td></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
               
-          </div>
-          <div className="shadow-box">
-              <div className="column-container-small">
-
-                  <div className="text-tile">
-                     <h2 style={{marginLeft: "10px"}}>Security Reccomendations</h2>
-                      <hr style={{marginTop: "10px"}}/>
-
-                      <Link to="/connectors"><div className="highlight ultrawide">
-                        Automated Updates: 6
-                      </div></Link>
-                      <Link to="/connectors"><div className="highlight ultrawide">
-                        Recommended Actions: 3
-                      </div></Link>
-                              
-                  </div>
-                        
-              </div>
-              
-          </div>
         </div>
-        
-        
+          
       </div>
+        
+        
+    </div>
     );
   };
 
-  const ObjectTabs = ({ objects, selectedObject, onSelectObject }) => {
+  const ObjectTabs = ({ objects, selectedTab, onSelectObject }) => {
     return (
       <div className="tab-selector-vertical">
-        {objects.map((object) => (
+        {tabs.map((tab) => (
           <div
-            key={object.name}
-            className={`tab-item ${(object.name === selectedObject.name) ? "selected" : ""}`}
-            onClick={() => onSelectObject(object)}
+            key={tab}
+            className={`tab-item ${(tab === selectedTab) ? "selected" : ""}`}
+            onClick={() => onSelectObject(tab)}
           >
-            {object.name}
+            {tab}
           </div>
         ))}
       </div>
@@ -106,8 +85,8 @@ const Assets = () => {
     <div style={{height: "100%", width: "100%", boxSizing:"border-box", margin:"0", padding:"0"}}>
     <h1>Assets</h1>
     <div className="assets-dashboard">
-      <ObjectTabs objects={objects} selectedObject={selectedObject} onSelectObject={handleSelectObject} />
-      <ObjectInfo selectedObject={selectedObject} />
+      <ObjectTabs objects={objects} selectedTab={selectedTab} onSelectObject={handleSelectObject} />
+      <ObjectInfo />
     </div>
     </div>
   );
