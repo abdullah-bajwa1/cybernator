@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const AiConnectors = () => {
   const objects = [
-    { name: "ChatGPT", health: 75, auto: 7, manual: 5, act12ivity: [12,10,9,7,11] },
+    { name: "ChatGPT", health: 75, auto: 7, manual: 5, activity: [12,10,9,7,11] },
     { name: "Claude", health: 88, auto: 8, manual: 3, activity: [3,8,12,6,14] },
     { name: "Llama", health: 42, auto: 15, manual: 7, activity: [12,9,9,7,10] },
     { name: "Orca", health: 95, auto: 18, manual: 4, activity: [2,10,9,7,6] },
