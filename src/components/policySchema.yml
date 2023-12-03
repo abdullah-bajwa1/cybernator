@@ -1,0 +1,142 @@
+inputActionOptions:
+  - none
+  - mask
+  - block
+  - block (muted)
+  - edited by rule
+  - constrainDataLookup
+
+outputActionOptions:
+  - none
+  - mask
+  - block
+  - block (muted)
+
+notificationActionOptions:
+  - none
+  - Track
+  - track and alert
+
+thresholdOptions:
+  - none
+  - low
+  - medium
+  - high
+
+notificationFrequencyOptions:
+  - none
+  - daily
+  - weekly
+  - fortnightly
+  - monthly
+
+notificationTargetOptions:
+  - HR
+  - SOC
+  - Compliance
+  - supervisor
+dataPoisoningActionOptions: -block
+  -keep # if this is not listed, can it default to "keep", the 99% most common option?
+
+policies:
+  - name: Customer Support
+    policyClasses:
+      - name: RBAC Policies
+        policies:
+          - policy_name: read_access_to_same_department
+            constraint_type: Conditional
+            enabled: true
+            input_action: constrainDataLookup
+            input_notification: some text
+            output_notification: none
+            output_action: none
+            notification_action: none
+            threshold: low
+            notification_frequency: daily
+            notification_target:
+              - HR
+              - supervisor
+            daily_alert_threshold: 10
+            weekly_alert_threshold: 50
+
+      - name: PII Policies
+        policies:
+          - policy_name: SSN
+            constraint_type: regex
+            enabled: true
+            input_action: mask
+            output_action: mask
+            notification_action: Track
+            threshold: low
+            notification_frequency: weekly
+            notification_target:
+              - HR
+              - supervisor
+              - Compliance
+            daily_alert_threshold: 10
+            weekly_alert_threshold: 50
+
+          - policy_name: Credit Card
+            constraint_type: regex
+            enabled: true
+            input_action: mask
+            output_action: mask
+            notification_action: Track
+            threshold: low
+            notification_frequency: weekly
+            notification_target:
+              - HR
+              - supervisor
+              - Compliance
+            daily_alert_threshold: 10
+            weekly_alert_threshold: 50
+
+      - name: Security Policies
+        policies:
+          - policy_name: detect_and_block_code
+            constraint_type: regex
+            enabled: false
+            input_action: block
+            output_action: none
+            notification_action: none
+            threshold: low
+            notification_frequency: daily
+            notification_target:
+              - HR
+              - supervisor
+              - Compliance
+            daily_alert_threshold: 5
+            weekly_alert_threshold: 25
+
+          - policy_name: Prompt Injection
+            constraint_type: Advanced (AI)
+            enabled: false
+            input_action: block
+            output_action: none
+            notification_action: none
+            data_poisoning_action: block
+            threshold: low
+            notification_frequency: daily
+            notification_target:
+              - HR
+              - supervisor
+              - Compliance
+            daily_alert_threshold: 5
+            weekly_alert_threshold: 25
+
+      - name: HR Policies
+        policies:
+          - policy_name: racist
+            constraint_type: Advanced (AI)
+            enabled: false
+            input_action: mask
+            output_action: block
+            notification_action: track
+            threshold: high
+            notification_frequency: none
+            notification_target:
+              - HR
+              - supervisor
+              - Compliance
+            daily_alert_threshold: 5
+            weekly_alert_threshold: 25

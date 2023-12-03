@@ -1,4 +1,4 @@
-import Traceback from "./Traceback"
+import Traceback from "../components/Traceback"
 
 const Investigate = () => {
   const nodes = [

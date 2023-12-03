@@ -1,5 +1,6 @@
 import { calculateColorCode } from "../utils";
 import { useState, useEffect } from "react";
+import {IoStatsChart} from 'react-icons/io5'
 
 const ProgressBar = ({ percent, label, widthOveride, padding }) => {
 
@@ -36,7 +37,7 @@ const ProgressBar = ({ percent, label, widthOveride, padding }) => {
   return (
     <div className="highlight ultrawide"  style={{width : widthOveride ? (widthOveride) : ""}}>
         <div className="transition-width progress-bar" style={{ width: `${value}%`, backgroundColor: calculateColorCode(value) }}></div>
-            <p>{label}: {value}%</p>
+            <p><IoStatsChart />&nbsp;{label}: {value}%</p>
     </div>
                     
   );
